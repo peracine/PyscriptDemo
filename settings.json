@@ -1,0 +1,15 @@
+{
+	"name": "My PyScript app",
+	"description": "PyScript app demo",
+	"version": "0.0.1",
+	"author_name": "John Doe",
+	"author_email": "john@doe.py",
+	"splashscreen": {"autoclose": true},
+	"interpreters": [{
+      "src": "https://cdn.jsdelivr.net/pyodide/v0.23.2/full/pyodide.js",
+      "name": "pyodide-0.23.2",
+      "lang": "python"
+    }],
+	"packages": ["matplotlib"]
+}
+

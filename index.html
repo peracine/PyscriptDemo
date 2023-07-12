@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">	
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>PyScript & Matplotlib</title>	  
+		<link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+		<script defer src="https://pyscript.net/latest/pyscript.js"></script>
+	</head>
+	<body>
+		<h1>PyScript & Matplotlib</h1>
+
+		<py-config type="json" src="./settings.json">
+		{
+			"fetch": [{"files": ["data.py"], "from": "utils"}]
+		}	
+		</py-config>
+		<py-script src="index.py"></py-script>
+
+		<label for="slctYear">Year:</label>
+		<select id="slctYear">
+			<option value="">--Select year--</option>
+			<option value="2020">2020</option>
+			<option value="2021">2021</option>
+			<option value="2022">2022</option>
+			<option value="2023">2023</option>
+		</select>	
+
+		<div id="divPlot"></div>	
+	</body>
+</html>
