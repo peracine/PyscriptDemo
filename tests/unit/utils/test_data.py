@@ -1,6 +1,6 @@
 import unittest
 from datetime import datetime
-from utils.data import get_timeseries
+from src.utils.data import get_timeseries
 
 #>python -m unittest tests/unit/utils/test_data.py
 class TestData(unittest.TestCase):

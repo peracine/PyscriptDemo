@@ -1,25 +1,20 @@
-import asyncio
-from playwright.async_api import async_playwright, expect
-
-url_index_page = 'http://localhost:8000/' 
-splash_timeout = 10_000
+import pytest
+from playwright.async_api import expect
+from tests.integration.conftest import PytestConf
 
 #>python -m pytest tests/integration/test_index.py --capture=tee-sys
-async def test_img_after_select(page) -> None:
-    await page.get_by_label('Year:').select_option('2020')
-    await expect(page.locator('img')).to_have_count(1)
+class TestIndexPage():
 
-async def main() -> None:
-    async with async_playwright() as playwright:
-        browser = await playwright.chromium.launch(headless=False)
-        context = await browser.new_context()
-        page = await context.new_page()
-        await page.goto(url_index_page)
-        await expect(page.locator('py-splashscreen')).to_have_count(0, timeout=splash_timeout)
-        
-        await test_img_after_select(page)
-        
-        await context.close()
-        await browser.close()
+    @property
+    def page_url(self) -> str:
+        #index.html by default 
+        return f'http://{PytestConf.SERVER_DOMAIN}:{PytestConf.SERVER_PORT}/'
+    
+    @pytest.mark.asyncio
+    async def test_img_after_select(self, pw_page, server_start) -> None:
+        await pw_page.goto(self.page_url)
+        await expect(pw_page.locator(PytestConf.SPLASH_ELEMENT)).to_have_count(0, timeout=PytestConf.SPLASH_TIMEOUT)
 
-asyncio.run(main())
+        await pw_page.locator('#slctYear').select_option('2020')
+
+        await expect(pw_page.locator('img')).to_have_count(1)
